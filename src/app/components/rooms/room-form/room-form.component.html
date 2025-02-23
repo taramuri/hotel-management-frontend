@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{isEditMode ? 'Редагування номера' : 'Новий номер'}}</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Номер</mat-label>
+          <input matInput formControlName="number" required>
+          <mat-error *ngIf="roomForm.get('number')?.hasError('required')">
+            Номер обов'язковий
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Тип номера</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option *ngFor="let type of roomTypes" [value]="type.value">
+              {{type.label}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="roomForm.get('type')?.hasError('required')">
+            Тип номера обов'язковий
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Місткість</mat-label>
+          <input matInput type="number" formControlName="capacity" required min="1">
+          <mat-error *ngIf="roomForm.get('capacity')?.hasError('required')">
+            Місткість обов'язкова
+          </mat-error>
+          <mat-error *ngIf="roomForm.get('capacity')?.hasError('min')">
+            Місткість повинна бути більше 0
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Ціна за добу</mat-label>
+          <input matInput type="number" formControlName="price" required min="0">
+          <span matSuffix>грн</span>
+          <mat-error *ngIf="roomForm.get('price')?.hasError('required')">
+            Ціна обов'язкова
+          </mat-error>
+          <mat-error *ngIf="roomForm.get('price')?.hasError('min')">
+            Ціна не може бути від'ємною
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-slide-toggle formControlName="isAvailable" class="form-field">
+          Номер доступний
+        </mat-slide-toggle>
+  
+        <div class="form-actions">
+          <button mat-button type="button" routerLink="/rooms" color="warn">Скасувати</button>
+          <button mat-raised-button color="primary" type="submit">{{isEditMode ? 'Оновити' : 'Додати'}}</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,13 @@
+.filter-field {
+    width: 100%;
+    max-width: 500px;
+    margin-right: 16px;
+  }
+  
+  .add-button {
+    margin-bottom: 16px;
+  }
+  
+  table {
+    width: 100%;
+  }

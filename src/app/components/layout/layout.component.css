@@ -1,0 +1,30 @@
+.app-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.logo-container {
+  padding: 16px;
+  text-align: center;
+}
+
+.nav-list {
+  padding-top: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  padding: 20px;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}

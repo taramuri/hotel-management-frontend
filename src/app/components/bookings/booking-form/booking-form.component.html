@@ -1,0 +1,63 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{isEdit ? 'Редагувати' : 'Нове'}} бронювання</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Клієнт</mat-label>
+          <mat-select formControlName="client">
+            <mat-option *ngFor="let client of clients" [value]="client._id">
+              {{client.lastName}} {{client.firstName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Номер</mat-label>
+          <mat-select formControlName="room">
+            <mat-option *ngFor="let room of rooms" [value]="room._id">
+              {{room.number}} ({{room.type}}) - {{room.price}} грн/ніч
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Дата заїзду</mat-label>
+          <input matInput [matDatepicker]="checkInPicker" formControlName="checkInDate">
+          <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
+          <mat-datepicker #checkInPicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Дата виїзду</mat-label>
+          <input matInput [matDatepicker]="checkOutPicker" formControlName="checkOutDate">
+          <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+          <mat-datepicker #checkOutPicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Статус</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="pending">Очікує</mat-option>
+            <mat-option value="confirmed">Підтверджено</mat-option>
+            <mat-option value="completed">Завершено</mat-option>
+            <mat-option value="cancelled">Скасовано</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Примітки</mat-label>
+          <textarea matInput formControlName="notes"></textarea>
+        </mat-form-field>
+  
+        <div class="form-actions">
+          <button mat-button type="button" routerLink="/bookings">Скасувати</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!bookingForm.valid">
+            {{isEdit ? 'Зберегти' : 'Створити'}}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{isEditMode ? 'Редагування клієнта' : 'Новий клієнт'}}</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Прізвище</mat-label>
+          <input matInput formControlName="lastName" required>
+          <mat-error *ngIf="clientForm.get('lastName')?.hasError('required')">
+            Прізвище обов'язкове
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Ім'я</mat-label>
+          <input matInput formControlName="firstName" required>
+          <mat-error *ngIf="clientForm.get('firstName')?.hasError('required')">
+            Ім'я обов'язкове
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>По батькові</mat-label>
+          <input matInput formControlName="middleName" required>
+          <mat-error *ngIf="clientForm.get('middleName')?.hasError('required')">
+            По батькові обов'язкове
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Паспортні дані</mat-label>
+          <input matInput formControlName="passportData" required>
+          <mat-error *ngIf="clientForm.get('passportData')?.hasError('required')">
+            Паспортні дані обов'язкові
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Коментар</mat-label>
+          <textarea matInput formControlName="comment" rows="4"></textarea>
+        </mat-form-field>
+  
+        <div class="form-actions">
+          <button mat-button type="button" routerLink="/clients">Скасувати</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="clientForm.invalid">
+            {{isEditMode ? 'Зберегти' : 'Створити'}}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>

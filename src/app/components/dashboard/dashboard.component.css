@@ -1,0 +1,53 @@
+.dashboard-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  
+    h1 {
+      margin-bottom: 24px;
+      color: #333;
+    }
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .stat-card {
+    text-align: center;
+    padding: 16px;
+  
+    .stat-value {
+      font-size: 36px;
+      font-weight: bold;
+      color: #1976d2;
+    }
+  
+    .stat-label {
+      font-size: 16px;
+      color: #666;
+      margin-top: 8px;
+    }
+  }
+  
+  .quick-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  
+    button {
+      min-width: 200px;
+    }
+  }
+  
+  .recent-bookings {
+    margin-top: 24px;
+  
+    mat-list-item {
+      margin-bottom: 8px;
+    }
+  }

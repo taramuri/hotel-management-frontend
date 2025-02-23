@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Room Management</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="table-container">
+      <div class="table-actions">
+        <button mat-raised-button color="primary" routerLink="new">
+          <mat-icon>add</mat-icon>
+          Add Room
+        </button>
+      </div>
+
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Room Number Column -->
+        <ng-container matColumnDef="number">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Room Number</th>
+          <td mat-cell *matCellDef="let room">{{room.number}}</td>
+        </ng-container>
+
+        <!-- Capacity Column -->
+        <ng-container matColumnDef="capacity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacity</th>
+          <td mat-cell *matCellDef="let room">{{room.capacity}}</td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+          <td mat-cell *matCellDef="let room">{{room.type}}</td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+          <td mat-cell *matCellDef="let room">{{room.price | currency}}</td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let room">
+            <mat-icon [color]="room.isAvailable ? 'primary' : 'warn'">
+              {{room.isAvailable ? 'check_circle' : 'cancel'}}
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let room">
+            <button mat-icon-button color="primary" [routerLink]="[room._id, 'edit']">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteRoom(room._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of rooms"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
